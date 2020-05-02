@@ -19,6 +19,12 @@ import { link } from 'svelte-spa-router'
       <li class="nav-item">
         <a class="nav-link" href="/Peliculastop" use:link>Peliculas top</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Peliculasnuevas" use:link>Ultimas peliculas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Peliculasproximas" use:link>Proximas peliculas</a>
+      </li>
       
     </ul>
   </div>

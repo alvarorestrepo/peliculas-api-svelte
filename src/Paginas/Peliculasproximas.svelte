@@ -1,9 +1,9 @@
 <script>
 import Carga from '../Componentes/Cargador.svelte'
 import Grid from '../Componentes/Grid.svelte'
-const URL = 'https://api.themoviedb.org/3/movie/top_rated?api_key=8d1e9f57bae66f3789c247673ac7f4cf&language=es'
-let peliculas = []
+const URL = 'https://api.themoviedb.org/3/movie/upcoming?api_key=8d1e9f57bae66f3789c247673ac7f4cf&language=es&page=1'
 let promise = ajax()
+let peliculas = []
 
 async function ajax(){
     const res = await fetch(URL)
@@ -12,21 +12,19 @@ async function ajax(){
     if (res.ok) {
         return peliculas.results
     }else{
-        throw new Error('no cargo la api')
+        throw new Error ('Error en carga de API')
     }
 }
-
-
 </script>
 
-<h1>Peliculas top</h1>
+<h1>Proximas Peliculas</h1>
 
 {#await promise}
-  <div align='center'>
-  <Carga/>
-  </div>
+   <div align = 'center'>
+   <Carga/>
+   </div>
 {:then peliculas}
-    <Grid {peliculas}/>
+  <Grid {peliculas}/>
 {:catch error}
     <!-- promise was rejected -->
 {/await}

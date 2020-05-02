@@ -6,16 +6,14 @@
   const url = "https://api.themoviedb.org/3/movie/";
   const key = "?api_key=8d1e9f57bae66f3789c247673ac7f4cf&language=es";
   const urlfinal = url + id + key;
-  
+
   let pelicula = {};
   let generos = [];
 
   onMount(async () => {
     const res = await fetch(urlfinal);
     pelicula = await res.json();
-    console.log(pelicula);
     generos = await pelicula.genres;
-    console.log(generos);
   });
 </script>
 
@@ -44,7 +42,7 @@
       <img
         src="https://image.tmdb.org/t/p/w500{pelicula.poster_path}"
         width="100%"
-        height="700"
+        height="800"
         alt={pelicula.title} />
     </div>
     <div class="col-sm-6">
@@ -72,7 +70,7 @@
             class="btn btn-success "
             target="_blank"
             href={pelicula.homepage}>
-            Ver pelicula
+            Tráiler
           </a>
           <button class="btn btn-primary ">Volver</button>
         </div>
