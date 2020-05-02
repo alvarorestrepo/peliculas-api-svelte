@@ -1,11 +1,12 @@
 <script>
   import { onMount } from "svelte";
+  import Carga from "../Componentes/Cargador.svelte";
   export let params = {};
   let id = params.id;
   const url = "https://api.themoviedb.org/3/movie/";
   const key = "?api_key=8d1e9f57bae66f3789c247673ac7f4cf&language=es";
   const urlfinal = url + id + key;
-
+  
   let pelicula = {};
   let generos = [];
 
@@ -28,14 +29,16 @@
   p {
     text-align: justify;
   }
-  .abajo{
-      margin-top: 250px;
-      
+  .abajo {
+    margin-top: 250px;
   }
- 
 </style>
 
-
+{#await pelicula}
+  <div aling="center">
+    <Carga />
+  </div>
+{:then pelicula}
   <div class="row mt-3">
     <div class="col-sm-6">
       <img
@@ -60,15 +63,25 @@
       <br />
 
       <div class="row">
-      <div class="col-sm-8">
-      <div class="ranking" align="center">{pelicula.vote_average}</div>
-      </div>
-      <div class="col-sm-4 abajo">
-      <a type="button" class="btn btn-success  " target="_blank" href={pelicula.homepage}>Ver pelicula</a>
-      <button class="btn btn-primary ">Volver</button>
-      </div>
+        <div class="col-sm-8">
+          <div class="ranking" align="center">{pelicula.vote_average}</div>
+        </div>
+        <div class="col-sm-4 abajo">
+          <a
+            type="button"
+            class="btn btn-success "
+            target="_blank"
+            href={pelicula.homepage}>
+            Ver pelicula
+          </a>
+          <button class="btn btn-primary ">Volver</button>
+        </div>
       </div>
 
     </div>
 
   </div>
+
+{:catch error}
+  <!-- promise was rejected -->
+{/await}
